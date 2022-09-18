@@ -29,7 +29,8 @@ export class CoursesController {
   // se passar property no body vc pega um valor especifico ex: @Body('name')
   // @HttpCode(HttpStatus.NO_CONTENT)
   create(@Body() createCourseDTO: CreateCourseDto) {
-    return this.coursesService.create(createCourseDTO);
+    this.coursesService.create(createCourseDTO);
+    return createCourseDTO;
   }
 
   @Patch(':id')
