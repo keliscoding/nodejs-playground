@@ -10,9 +10,12 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
+import { CoursesService } from './courses.service';
 
 @Controller('courses')
 export class CoursesController {
+  constructor(private readonly coursesService: CoursesService) {}
+
   @Get()
   findAll(@Res() response) {
     //isso aqui não é a melhor forma de tratar status nas respostas
