@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Res,
+} from '@nestjs/common';
 
 @Controller('courses')
 export class CoursesController {
-  @Get('hello')
-  sayHello(): string {
-    return 'Hello!';
+  @Get()
+  findAll(@Res() response) {
+    //isso aqui não é a melhor forma de tratar status nas respostas
+    return response.status(200).send('Listagem de cursos');
   }
 
   @Get('sayMyName/:name')
@@ -14,7 +24,8 @@ export class CoursesController {
 
   @Post()
   //se passar property no body vc pega um valor especifico ex: @Body('name')
-  create(@Body() body): string {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  create(@Body() body) {
     return body;
   }
 }
