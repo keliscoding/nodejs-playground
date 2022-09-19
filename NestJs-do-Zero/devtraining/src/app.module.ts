@@ -16,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: 'admin',
       database: 'devtraining',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: true, // isso aqui é só pra ambiente dev
     }),
   ],
   controllers: [AppController],
