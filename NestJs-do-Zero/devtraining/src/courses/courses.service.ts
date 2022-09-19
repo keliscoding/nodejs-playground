@@ -17,13 +17,15 @@ export class CoursesService {
   ) {}
 
   async findAll() {
-    return this.courseRepository.find();
+    return this.courseRepository.find({ relations: ['tags'] });
   }
 
   async findOne(id: string) {
-    return this.courseRepository.findOneOrFail(id).catch((err) => {
-      throw new NotFoundException(`Course ID ${id} not found`);
-    });
+    return this.courseRepository
+      .findOneOrFail(id, { relations: ['tags'] })
+      .catch((err) => {
+        throw new NotFoundException(`Course ID ${id} not found`);
+      });
   }
 
   async create(createCourseDTO: CreateCourseDto) {
