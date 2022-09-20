@@ -15,7 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'postgres',
       password: 'postgres',
       database: 'devtraining',
-      autoLoadEntities: true,
+      entities: [__dirname + '/**/*.entity.js'], // informa onde as entidades estão para o nestjs
+      autoLoadEntities: false,
       synchronize: false, // isso aqui é só pra ambiente dev
     }),
   ],
