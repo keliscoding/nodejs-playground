@@ -24,6 +24,19 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=devtraining
+
+  postgres-test:
+    build: .docker/postgres
+    container_name: cursonestjs-dbtest
+    restart: always
+    tty: true
+    ports:
+      - "5433:5432"
+    volumes:
+      - .docker/dbdatatest:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=devtraining-tests
     
   pgadmin:
     image: dpage/pgadmin4
