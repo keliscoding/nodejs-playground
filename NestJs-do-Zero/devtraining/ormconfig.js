@@ -1,9 +1,9 @@
 module.exports = {
   type: 'postgres',
-  host: 'localhost',
+  host: 'postgres', //nome no docker compose
   port: 5432,
-  username: 'admin',
-  password: 'admin',
+  username: 'postgres',
+  password: 'postgres',
   database: 'devtraining',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/src/migrations/*.js'],

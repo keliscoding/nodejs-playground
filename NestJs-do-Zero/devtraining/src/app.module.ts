@@ -10,13 +10,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     CoursesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgres',
       port: 5432,
-      username: 'admin',
-      password: 'admin',
+      username: 'postgres',
+      password: 'postgres',
       database: 'devtraining',
       autoLoadEntities: true,
-      synchronize: true, // isso aqui é só pra ambiente dev
+      synchronize: false, // isso aqui é só pra ambiente dev
     }),
   ],
   controllers: [AppController],
