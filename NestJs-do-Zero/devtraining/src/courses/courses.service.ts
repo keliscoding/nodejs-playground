@@ -21,11 +21,11 @@ export class CoursesService {
   }
 
   async findOne(id: string) {
-    return this.courseRepository
-      .findOneOrFail(id, { relations: ['tags'] })
-      .catch((err) => {
-        throw new NotFoundException(`Course ID ${id} not found`);
-      });
+    const course = this.courseRepository.findOne(id, { relations: ['tags'] });
+
+    if (!course) throw new NotFoundException(`Course ID ${id} not found`);
+
+    return course;
   }
 
   async create(createCourseDTO: CreateCourseDto) {
