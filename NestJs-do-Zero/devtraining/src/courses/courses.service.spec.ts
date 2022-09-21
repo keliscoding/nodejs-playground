@@ -1,36 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
-import { CoursesService } from './courses.service';
-import { Course } from './entities/course.entity';
-import { Tag } from './entities/tag.entity';
 import { NotFoundException } from '@nestjs/common/exceptions';
-
-type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
-
-const createMockRepository = <T = any>(): MockRepository<T> => ({
-  findOne: jest.fn(),
-});
+import { CoursesService } from './courses.service';
 
 describe('CoursesService', () => {
   let service: CoursesService;
-  let coursesRepository: MockRepository;
+  let id;
+  let date;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CoursesService,
-        { provide: Connection, useValue: {} },
-        {
-          provide: getRepositoryToken(Course),
-          useValue: createMockRepository(),
-        },
-        { provide: getRepositoryToken(Tag), useValue: createMockRepository() },
-      ],
-    }).compile();
-
-    service = module.get<CoursesService>(CoursesService);
-    coursesRepository = module.get<MockRepository>(getRepositoryToken(Course));
+    service = new CoursesService();
+    id = 'bdd9de0d-ab6a-4b65-809f-59f0c054196e';
+    date = new Date();
   });
 
   it('should be defined', () => {

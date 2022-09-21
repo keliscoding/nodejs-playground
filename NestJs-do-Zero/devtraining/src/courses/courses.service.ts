@@ -8,12 +8,13 @@ import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class CoursesService {
-  constructor(
-    @Inject('COURSE_REPOSITORY')
-    private readonly courseRepository: Repository<Course>,
-    @Inject('TAGS_REPOSITORY')
-    private readonly tagRepository: Repository<Tag>,
-  ) {}
+  /*o professor retira a injeção via construtor por causa dos testes...
+    deve haver alguma forma de testar sem fazer isso, depois tenho que procurar.
+  */
+  @Inject('COURSE_REPOSITORY')
+  private readonly courseRepository: Repository<Course>;
+  @Inject('TAGS_REPOSITORY')
+  private readonly tagRepository: Repository<Tag>;
 
   async findAll() {
     return this.courseRepository.find({ relations: ['tags'] });
