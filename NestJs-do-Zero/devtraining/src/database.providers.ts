@@ -11,7 +11,7 @@ export const databaseProviders = [
         username: 'postgres',
         password: 'postgres',
         database: 'devtraining',
-        entities: [__dirname + '/**/*.entity.js'],
+        entities: [__dirname + './**/*.entity.js'],
         synchronize: false,
       });
 
