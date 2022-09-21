@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto--no-spec';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -12,7 +11,7 @@ export class CoursesService {
   constructor(
     @Inject('COURSE_REPOSITORY')
     private readonly courseRepository: Repository<Course>,
-    @InjectRepository(Tag)
+    @Inject('TAGS_REPOSITORY')
     private readonly tagRepository: Repository<Tag>,
   ) {}
 

@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from '../database/database.module';
 import { CoursesController } from './courses.controller';
+import { courseProviders } from './courses.providers';
 import { CoursesService } from './courses.service';
-import { Course } from './entities/course.entity';
-import { Tag } from './entities/tag.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Course, Tag])], //aqui ficam as entidades mapeadas do modulo
+  imports: [DatabaseModule], //aqui ficam as entidades mapeadas do modulo
   controllers: [CoursesController],
-  providers: [CoursesService],
+  providers: [...courseProviders, CoursesService],
 })
 export class CoursesModule {}

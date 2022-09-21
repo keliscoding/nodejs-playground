@@ -48,7 +48,7 @@ describe('Courses: /courses', () => {
 
 
   // não entendo pq não ta retornando um objeto no body mas ok
-  it.skip('Create POST /courses', async () => {
+  it('Create POST /courses', async () => {
     return request(app.getHttpServer())
       .post('/courses')
       .send(course)
@@ -66,8 +66,8 @@ describe('Courses: /courses', () => {
       })
   });
 
-  it.todo('Create GET /courses');
-  it.todo('Create GET /courses/id');
-  it.todo('Create PATCH /courses/id');
-  it.todo('Create DELETE /courses/id');
+  // it.todo('Create GET /courses');
+  // it.todo('Create GET /courses/id');
+  // it.todo('Create PATCH /courses/id');
+  // it.todo('Create DELETE /courses/id');
 });
