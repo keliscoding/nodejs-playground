@@ -8,7 +8,7 @@ import { Request } from 'express';
 import { sign } from 'jsonwebtoken';
 import { Model } from 'mongoose';
 import { User } from 'src/users/models/users.model';
-import { JwtPayload } from '../../dist/auth/models/jwt-payload.model';
+import { JwtPayload } from './models/jwt-payload.model';
 
 @Injectable()
 export class AuthService {
