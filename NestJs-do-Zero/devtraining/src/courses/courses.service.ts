@@ -40,7 +40,7 @@ export class CoursesService {
       ...createCourseDTO,
       tags,
     });
-    await this.courseRepository.save(course);
+    return await this.courseRepository.save(course);
   }
 
   async update(id: string, updateCourseDTO: UpdateCourseDto) {
