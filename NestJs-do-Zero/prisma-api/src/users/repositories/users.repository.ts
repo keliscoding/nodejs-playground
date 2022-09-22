@@ -19,7 +19,7 @@ export class UsersRepository {
   }
 
   async findOne(id: number): Promise<UserEntity> {
-    return this.prisma.user.findUnique({ where: { id } });
+    return this.prisma.user.findUniqueOrThrow({ where: { id } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
