@@ -34,11 +34,29 @@ export class PostsRepository {
   }
 
   async findAll(): Promise<Array<PostEntity>> {
-    return this.prisma.post.findMany();
+    return this.prisma.post.findMany({
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   }
 
   async findOne(id: number): Promise<PostEntity> {
-    return this.prisma.post.findUniqueOrThrow({ where: { id } });
+    return this.prisma.post.findUniqueOrThrow({
+      where: { id },
+      include: {
+        author: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
   }
 
   async update(id: number, updatePostDto: UpdatePostDto): Promise<PostEntity> {
