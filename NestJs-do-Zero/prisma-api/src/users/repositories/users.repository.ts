@@ -15,11 +15,16 @@ export class UsersRepository {
   }
 
   async findAll(): Promise<Array<UserEntity>> {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      include: { posts: { select: { title: true, createdAt: true } } },
+    });
   }
 
   async findOne(id: number): Promise<UserEntity> {
-    return this.prisma.user.findUniqueOrThrow({ where: { id } });
+    return this.prisma.user.findUniqueOrThrow({
+      where: { id },
+      include: { posts: { select: { title: true, createdAt: true } } },
+    });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
