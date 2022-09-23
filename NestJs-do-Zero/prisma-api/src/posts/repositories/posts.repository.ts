@@ -15,7 +15,7 @@ export class PostsRepository {
 
     delete createPostDto.authorEmail;
 
-    const user = await this.prisma.user
+    await this.prisma.user
       .findUniqueOrThrow({
         where: { email },
       })
@@ -60,7 +60,48 @@ export class PostsRepository {
   }
 
   async update(id: number, updatePostDto: UpdatePostDto): Promise<PostEntity> {
-    return this.prisma.post.update({ where: { id }, data: updatePostDto });
+    const { authorEmail: email } = updatePostDto;
+
+    if (!email) {
+      return this.prisma.post.update({
+        data: updatePostDto,
+        where: { id },
+        include: {
+          author: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      });
+    }
+
+    delete updatePostDto.authorEmail;
+
+    await this.prisma.user
+      .findUniqueOrThrow({ where: { email } })
+      .catch(err => {
+        throw new NotFoundError('Author not found');
+      });
+
+    const data: Prisma.PostUpdateInput = {
+      ...updatePostDto,
+      author: {
+        connect: { email },
+      },
+    };
+
+    return this.prisma.post.update({
+      where: { id },
+      data,
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   }
 
   async remove(id: number): Promise<PostEntity> {
